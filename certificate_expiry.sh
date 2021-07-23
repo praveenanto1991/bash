@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 RED='\033[0;31m'
+GREEN='\033[0;32m'
 domains=/path-to/domains.txt
 
 while read line; do
@@ -13,5 +14,7 @@ while read line; do
    if [ "$target" -gt "$expires" ]
    then
      echo "$RED certificate expires in lees than 7 days on $(date -d @$expires '+%Y-%m-%d') $NOCOLOR";
+   else
+     echo "$GREEN certificate expires on $(date -d @$expires '+%Y-%m-%d') $NOCOLOR"
    fi
 done<$domains
