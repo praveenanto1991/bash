@@ -1,1 +1,1 @@
-# bash
+This Repo contains bash scripts 
