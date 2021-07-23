@@ -1,4 +1,5 @@
-set -eu
+#!/usr/bin/env bash
+set -eu -o pipefail
 RED='\033[0;31m'
 domains=/path-to/domains.txt
 
