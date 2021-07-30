@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NOCOLOR='\033[0m'
+domains=/pathto/domains.txt
+
+while read line; do
+   echo "checking if $line expires in less than 7 days"
+   expires=$(date -d "$(echo | openssl s_client -connect "$line":443 -servername "$line" 2>/dev/null | openssl x509 -text | grep -i 'Not After' | awk '{print $4,$5,$7}')" '+%s')
+   target=$(date -d "+7 days" '+%s')
+   if [ "$target" -gt "$expires" ]
+   then
+     echo "$RED certificate expires in less than 7 days on $(date -d @$expires '+%Y-%m-%d') $NOCOLOR"
+   else
+     echo "$GREEN certificate expires on "$(date -d @$expires '+%Y-%m-%d')" $NOCOLOR"
+   fi
+done<$domains
