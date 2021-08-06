@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -eu -o pipefail
+#set -eu -o pipefail
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 NOCOLOR='\033[0m'
@@ -10,9 +10,9 @@ valid=()
 function output(){
   if [[ ${expired[@]} ]]
   then
-    echo "${expired[*]}"
+   ( IFS=$'\n'; echo "${expired[*]}" )
   else
-    echo "$valid"
+   ( IFS=$'\n';  echo "${valid[*]}" )
   fi
 }
 while read line; do
