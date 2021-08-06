@@ -4,7 +4,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NOCOLOR='\033[0m'
 #host=$1
-domains=/var/vcap/jobs/zabbix-server/helpers/domains.txt
+domains=/path-to/domains.txt
 expired=()
 valid=()
 function output(){
